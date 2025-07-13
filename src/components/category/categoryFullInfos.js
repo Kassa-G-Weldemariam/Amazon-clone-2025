@@ -2,21 +2,25 @@ export const categoryInfos = [
   {
     title: "Electronics",
     category: "electronics",
-    image: "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
+    image:
+      "https://thumbs.dreamstime.com/b/gadgets-accessories-gadgets-accessories-isolated-white-background-133429004.jpg?w=992",
   },
   {
     title: "jewelry",
     category: "jewelry",
-    image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaMrV1cRxmO1qStcaj5eZtPv28rF-8r_Vf-g&s",
   },
   {
     title: "men's clothing",
     category: "men's clothing",
-    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+    image:
+      "https://www.shutterstock.com/image-photo/flat-lay-set-classic-mens-600nw-445572067.jpg",
   },
   {
     title: "women's clothing",
     category: "women's clothing",
-    image: "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
+    image:
+      "https://img.freepik.com/premium-photo/beautiful-elegant-evening-women-s-dress-white-background_236836-20487.jpg",
   },
 ];
