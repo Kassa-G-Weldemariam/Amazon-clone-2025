@@ -4,18 +4,19 @@ import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LowerHeader from "./LowerHeader";
+import { Link } from 'react-router-dom'
 function Header() { 
   return (
     <>
       <section className={classes.header_container}>
         <div className={classes.logo_container}>
           {/* logo */}
-          <a href="/">
+          <Link to="/">
             <img
               src="https://pngimg.com/d/amazon_PNG11.png"
               alt="amazon logo"
             />
-          </a>
+          </Link>
           <div className={classes.delivery}>
             {/* delivery */}
             <span>
@@ -37,7 +38,7 @@ function Header() {
         </div>
         {/* right side link */}
         <div className={classes.order_container}>
-          <a href="" className={classes.language}>
+          <Link to="" className={classes.language}>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Flag_of_the_United_States_%28Web_Colors%29.svg/1920px-Flag_of_the_United_States_%28Web_Colors%29.svg.png"
               alt="flag"
@@ -45,23 +46,23 @@ function Header() {
             <select name="" id="">
               <option value="">EN</option>
             </select>
-          </a>
-          <a href="">
+          </Link>
+          <Link to="/Auth">
             <div>
               <p> Hello, Sign In</p>
               <span>Account & Lists</span>
             </div>
-          </a>
-          <a href="">
+          </Link>
+          <Link to="/orders">
             <div>
               <p>Returns</p>
               <span>& Orders</span>
             </div>
-          </a>
-          <a href="" className={classes.cart}>
+          </Link>
+          <Link to="/cart" className={classes.cart}>
             <span>0</span>
             <ShoppingCartOutlinedIcon size={35} />
-          </a>
+          </Link>
         </div>
       </section>
       <LowerHeader />
