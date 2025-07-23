@@ -30,7 +30,10 @@ function Results() {
             results.map((product) => (
               <ProductCard 
                 key={product.id}
-                product={product}/> 
+                product={product}
+                detailDesc={false}
+                renderAdd={true}
+                /> 
             ))
           }
         </div>

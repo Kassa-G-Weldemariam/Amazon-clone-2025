@@ -32,7 +32,11 @@ function ProductDetail() {
         justifyContent:"center",
         marginTop:"20px",
       }}>
-        {isLoading ? <Loader /> : <ProductCard product={product} />}
+        {isLoading ? <Loader /> : <ProductCard product={product} 
+        flex={true}
+        detailDesc={true}
+        renderAdd={true}
+        />}
       </div>
     </LayOut>
   );

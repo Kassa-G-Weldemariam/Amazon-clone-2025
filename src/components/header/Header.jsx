@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import classes from './header.module.css'
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LowerHeader from "./LowerHeader";
 import { Link } from 'react-router-dom'
+import { DataContext } from '../dataProvider/DataProvider.jsx';
 function Header() { 
+
+  const [{basket}, dispatch]=useContext(DataContext);
+  const totalItems= basket?.reduce((amount, item) =>( item.amount + amount), 0);
   return (
-    <>
+    <section className={classes.fixed}>
       <section className={classes.header_container}>
         <div className={classes.logo_container}>
           {/* logo */}
@@ -60,13 +64,13 @@ function Header() {
             </div>
           </Link>
           <Link to="/cart" className={classes.cart}>
-            <span>0</span>
+            <span>{totalItems}</span>
             <ShoppingCartOutlinedIcon size={35} />
           </Link>
         </div>
       </section>
       <LowerHeader />
-    </>
+    </section>
   );
 }
 
