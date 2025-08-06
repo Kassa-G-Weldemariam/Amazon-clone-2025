@@ -6,9 +6,10 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LowerHeader from "./LowerHeader";
 import { Link } from 'react-router-dom'
 import { DataContext } from '../dataProvider/DataProvider.jsx';
+import {auth} from '../../utility/firebase.js'
 function Header() { 
 
-  const [{basket}, dispatch]=useContext(DataContext);
+  const [{user, basket}, dispatch]=useContext(DataContext);
   const totalItems= basket?.reduce((amount, item) =>( item.amount + amount), 0);
   return (
     <section className={classes.fixed}>
@@ -38,7 +39,7 @@ function Header() {
             <option value="">All</option>
           </select>
           <input type="text" placeholder="Search Product" />
-          <SearchOutlinedIcon size={25} />
+          <SearchOutlinedIcon size={50} />
         </div>
         {/* right side link */}
         <div className={classes.order_container}>
@@ -51,10 +52,20 @@ function Header() {
               <option value="">EN</option>
             </select>
           </Link>
-          <Link to="/Auth">
+          <Link to={!user && "/Auth"}>
             <div>
-              <p> Hello, Sign In</p>
-              <span>Account & Lists</span>
+              <div>
+                {user ? (
+                    <>
+                      <p>Hello, {user?.email?.split("@")[0]}</p> 
+                      <span onClick={()=>{auth.signOut()}}>sign Out</span>
+                    </>):(
+                    <>
+                      <p> Hello, Sign In</p>
+                      <span>Account & Lists</span>
+                    </> )
+                }
+              </div>
             </div>
           </Link>
           <Link to="/orders">

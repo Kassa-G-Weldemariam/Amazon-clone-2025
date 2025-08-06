@@ -8,6 +8,7 @@ function CarouselEffect() {
     <div className={classes.carousel_container}>
       <Carousel
         autoplay={true}
+        interval={3000}
         infiniteLoop={true}
         showThumbs={false}
         showIndicators={false}
