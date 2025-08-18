@@ -149,7 +149,7 @@
     align-items: center;
     gap: 2px;
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 760px) {
     .header_container{
         display: flex;
         flex-direction: column !important;

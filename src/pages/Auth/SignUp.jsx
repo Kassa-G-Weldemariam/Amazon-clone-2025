@@ -1,54 +1,59 @@
-import React, {useState, useContext} from 'react';
-import classes from './signUp.module.css';
-import { Link, useNavigate } from 'react-router-dom';
-import {auth} from '../../utility/firebase';
-import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth';
-import {DataContext} from '../../components/dataProvider/DataProvider';
-import { Type } from '../../utility/action.type';
-import { ClipLoader } from 'react-spinners';
+import React, { useState, useContext } from "react";
+import classes from "./signUp.module.css";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { auth } from "../../utility/firebase";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { DataContext } from "../../components/dataProvider/DataProvider";
+import { Type } from "../../utility/action.type";
+import { ClipLoader } from "react-spinners";
 
 function SignUp() {
-  const [email, setEmail]=useState("");
-  const [password, setPassword]=useState("");
-  const [error, setError]=useState("");
-  const [{user}, dispatch]=useContext(DataContext);
-  const [loading, setLoading]=useState({signin:false, signup:false})
-  const navigate=useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [{ user }, dispatch] = useContext(DataContext);
+  const [loading, setLoading] = useState({ signin: false, signup: false });
+  const navigate = useNavigate();
+  const navStateData = useLocation();
+  // console.log(navStateData);
   // console.log(user)
-  const authHandler=(e)=>{
-    e.preventDefault() 
-      if (e.target.name == "signin") {
-        setLoading({...loading, signin:true})
-        signInWithEmailAndPassword(auth, email, password)
+  const authHandler = (e) => {
+    e.preventDefault();
+    if (e.target.name == "signin") {
+      setLoading({ ...loading, signin: true });
+      signInWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
-          dispatch({
-            type:Type.SET_USER,
-            user:userInfo.user
-          })
-          setLoading({...loading, signin:false})
-          navigate("/")
-        })
-        .catch((error) => {
-          setError(error.message);
-          setLoading({...loading, signin:false})
-        });
-      } else {
-        setLoading({...loading, signup:true})
-        createUserWithEmailAndPassword(auth, email, password).then((userInfo)=>{
           dispatch({
             type: Type.SET_USER,
             user: userInfo.user,
           });
-          setLoading({...loading, signup:false})
-          navigate("/")
+          setLoading({ ...loading, signin: false });
+          navigate(navStateData?.state?.redirect || "/");
         })
-        .catch((error)=>{
-          setError(error.message)
-          setLoading({ ...loading, signup: false });       
-         })
-          
-      }
+        .catch((error) => {
+          setError(error.message);
+          setLoading({ ...loading, signin: false });
+        });
+    } else {
+      setLoading({ ...loading, signup: true });
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+          dispatch({
+            type: Type.SET_USER,
+            user: userInfo.user,
+          });
+          setLoading({ ...loading, signup: false });
+          navigate(navStateData?.state?.redirect || "/");
+        })
+        .catch((error) => {
+          setError(error.message);
+          setLoading({ ...loading, signup: false });
+        });
     }
+  };
 
   return (
     <section className={classes.login}>
@@ -60,6 +65,18 @@ function SignUp() {
       </Link>
       <div className={classes.login_container}>
         <h1>Sign In</h1>
+        {navStateData?.state?.msg && (
+          <small
+            style={{
+              padding:"5px",
+              textAlign:"center",
+              color: "red",
+              fontWeight:"bold",
+            }}
+          >
+            {navStateData?.state?.msg}
+          </small>
+        )}
         <form action="">
           <div>
             <label htmlFor="email">email</label>
@@ -113,4 +130,4 @@ function SignUp() {
   );
 }
 
-export default SignUp
+export default SignUp;
